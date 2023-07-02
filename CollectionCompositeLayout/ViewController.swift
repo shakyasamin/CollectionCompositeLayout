@@ -21,7 +21,7 @@ class ViewController: UIViewController, UICollectionViewDataSource {
         view.addSubview(collectionView)
         collectionView.register(MyCollectionViewCell.self, forCellWithReuseIdentifier: MyCollectionViewCell.identifier)
         collectionView.frame = view.bounds
-        collectionView.backgroundColor = .white
+//        collectionView.backgroundColor = .white
         collectionView.dataSource = self
         
     }
@@ -62,20 +62,23 @@ class ViewController: UIViewController, UICollectionViewDataSource {
             )
         )
         
+        tripletItem.contentInsets = NSDirectionalEdgeInsets(top: 2, leading: 2, bottom: 2, trailing: 2)
+    
+        
         let tripletHorizontalGroup = NSCollectionLayoutGroup.horizontal(
             layoutSize: NSCollectionLayoutSize(
                 widthDimension: .fractionalWidth(1.0),
-                heightDimension: .fractionalHeight(0.5)
+                heightDimension: .fractionalWidth(0.3)
             ),
             subitem: tripletItem,
-            count: 1
+            count: 3
         )
         
         //Group
         let horizontalGroup = NSCollectionLayoutGroup.horizontal(
             layoutSize: NSCollectionLayoutSize(
                 widthDimension: .fractionalWidth(1.0),
-                heightDimension: .fractionalHeight(0.5)
+                heightDimension: .fractionalWidth(0.7)
             ),
             subitems: [item , verticalStackGroup]
         )
@@ -83,9 +86,12 @@ class ViewController: UIViewController, UICollectionViewDataSource {
         let verticalGroup = NSCollectionLayoutGroup.vertical(
             layoutSize: NSCollectionLayoutSize(
                 widthDimension: .fractionalWidth(1.0),
-                heightDimension: .fractionalHeight(1)
+                heightDimension: .fractionalHeight(1.0)
             ),
-            subitems: [horizontalGroup, tripletHorizontalGroup]
+            subitems: [
+                horizontalGroup,
+                tripletHorizontalGroup
+            ]
         )
         
         //Sections
@@ -105,7 +111,6 @@ class ViewController: UIViewController, UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyCollectionViewCell.identifier, for: indexPath)
         return  cell
     }
-    
     
     
 }
